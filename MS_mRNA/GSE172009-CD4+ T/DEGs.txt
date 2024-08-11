@@ -1,0 +1,333 @@
+...1 ...2 ...3
+XM_017017213.1 NA NA
+XM_006712051.3 KDM3A lysine demethylase 3A
+XR_243270.1 NA NA
+NM_001043352.1 TPM3 tropomyosin 3
+XM_005260570.1 NA NA
+NM_001288653.1 CLTC clathrin heavy chain
+NM_203318.1 MYO18A myosin XVIIIA
+XM_017004604.1 NA NA
+XM_017006165.1 NA NA
+XM_017012569.1 NA NA
+NM_001127595.1 FCGR3A Fc gamma receptor IIIa
+NM_001292018.1 CYTH1 cytohesin 1
+NM_002868.3 RAB5B RAB5B, member RAS oncogene family
+XM_005264515.4 NA NA
+XM_005272018.4 KDM3B lysine demethylase 3B
+XM_005273458.1 KIF13B kinesin family member 13B
+XM_017010834.1 NA NA
+XM_017015542.1 NA NA
+XR_001737230.1 NA NA
+XM_011525084.2 RNF213 ring finger protein 213
+XM_011536581.1 SYNE2 spectrin repeat containing nuclear envelope protein 2
+XM_011541520.2 NA NA
+XM_011525875.2 NA NA
+XM_011541519.2 NA NA
+XM_017028665.1 NA NA
+NM_001252512.1 SOAT1 sterol O-acyltransferase 1
+XM_011511903.2 UXS1 UDP-glucuronate decarboxylase 1
+XM_017028664.1 NA NA
+NM_001303268.1 POLR2B RNA polymerase II subunit B
+XM_017000053.1 VAV3 vav guanine nucleotide exchange factor 3
+XM_005265528.4 KAT2B lysine acetyltransferase 2B
+XM_005259678.2 TMEM259 transmembrane protein 259
+XM_005266986.4 MAN1A1 mannosidase alpha class 1A member 1
+NM_001257137.2 ITCH itchy E3 ubiquitin protein ligase
+XM_005270341.3 NA NA
+XM_011538773.2 NA NA
+XR_935225.1 RNF138 ring finger protein 138
+NM_001005498.3 RHBDF2 rhomboid 5 homolog 2
+NM_001282980.1 TLE3 TLE family member 3, transcriptional corepressor
+NM_001292034.2 TAB2 TGF-beta activated kinase 1 (MAP3K7) binding protein 2
+NM_001324197.1 ITCH itchy E3 ubiquitin protein ligase
+NM_032189.3 ATP11A ATPase phospholipid transporting 11A
+NR_037921.1 MAVS mitochondrial antiviral signaling protein
+XM_005246446.2 GCA grancalcin
+XM_005251120.3 NA NA
+XM_005266244.2 NA NA
+XM_005270889.2 NASP nuclear autoantigenic sperm protein
+XM_017002470.1 NA NA
+XM_017018584.1 NA NA
+XR_943406.2 NA NA
+XM_017002805.1 NA NA
+NM_001315508.1 PCM1 pericentriolar material 1
+XM_011541290.2 NA NA
+XR_001741120.1 NA NA
+NM_001300943.1 EMSY EMSY transcriptional repressor, BRCA2 interacting
+NM_001010972.1 ZYX zyxin
+NM_001032999.2 CBFA2T2 CBFA2/RUNX1 partner transcriptional co-repressor 2
+NM_014784.3 ARHGEF11 Rho guanine nucleotide exchange factor 11
+XM_017016025.1 NA NA
+XM_017019740.1 PXN paxillin
+NM_001005744.1 NUMB NUMB endocytic adaptor protein
+NM_007203.4 PALM2AKAP2 PALM2 and AKAP2 fusion
+XM_005254622.4 TLE3 TLE family member 3, transcriptional corepressor
+XM_017007729.1 NA NA
+NM_003679.4 KMO kynurenine 3-monooxygenase
+XM_005271546.4 NA NA
+XM_017007027.1 NA NA
+XM_011522016.2 NA NA
+NM_001040439.1 MAPK8IP3 mitogen-activated protein kinase 8 interacting protein 3
+XM_005269572.3 NA NA
+XM_006724508.3 SCML1 Scm polycomb group protein like 1
+XM_017008572.1 TLR1 toll like receptor 1
+NM_001320752.1 STS steroid sulfatase
+NM_002431.3 MNAT1 MNAT1 component of CDK activating kinase
+NM_014910.4 ZNF507 zinc finger protein 507
+NM_031268.5 PDPK1 3-phosphoinositide dependent protein kinase 1
+NM_133375.4 DIS3L DIS3 like exosome 3'-5' exoribonuclease
+XM_005256835.3 NA NA
+XM_011514015.1 NIPBL NIPBL cohesin loading factor
+XM_011537133.2 NA NA
+XM_017014830.1 NA NA
+XR_001752418.1 NA NA
+XR_938782.1 NA NA
+NM_198977.1 ARHGEF1 Rho guanine nucleotide exchange factor 1
+NM_207038.1 TCF12 transcription factor 12
+NM_001265605.1 MORF4L1 mortality factor 4 like 1
+XM_017015564.1 NA NA
+XM_005254966.1 AEN apoptosis enhancing nuclease
+NM_001322929.1 STAU1 staufen double-stranded RNA binding protein 1
+XM_006714678.3 TCF7 transcription factor 7
+XM_011525964.2 ATP9B ATPase phospholipid transporting 9B (putative)
+XM_011539593.2 HERC4 HECT and RLD domain containing E3 ubiquitin protein ligase 4
+XM_017023913.1 DHX38 DEAH-box helicase 38
+NM_001031714.3 INF2 inverted formin 2
+NM_144653.4 NACC2 NACC family member 2
+NM_178578.3 PSMF1 proteasome inhibitor subunit 1
+XR_946784.2 NA NA
+NM_001277313.1 FMN1 formin 1
+NM_024070.3 PVRIG PVR related immunoglobulin domain containing
+XM_011511359.1 CCDC93 coiled-coil domain containing 93
+XM_011517529.2 LYN LYN proto-oncogene, Src family tyrosine kinase
+NM_133330.2 NSD2 nuclear receptor binding SET domain protein 2
+XM_011528010.1 LDLR low density lipoprotein receptor
+XM_011544957.2 NA NA
+XM_017004493.1 NA NA
+NR_027830.1 BCAP29 B cell receptor associated protein 29
+XM_017020478.1 ZC3H13 zinc finger CCCH-type containing 13
+XM_017025818.1 NA NA
+XM_005247471.4 NA NA
+XM_017015602.1 NA NA
+XM_017004526.1 TTC7A tetratricopeptide repeat domain 7A
+XR_001742121.1 NA NA
+NM_001322866.1 NIPAL3 NIPA like domain containing 3
+NM_001321704.1 RPS9 ribosomal protein S9
+XM_006719180.3 SH2B3 SH2B adaptor protein 3
+XM_017005404.1 NA NA
+XM_017022042.1 NA NA
+NM_001199342.1 RPL17 ribosomal protein L17
+XM_005268905.3 NA NA
+XM_017010177.1 SYNCRIP synaptotagmin binding cytoplasmic RNA interacting protein
+XM_011538969.2 NA NA
+NR_135789.1 RSRP1 arginine and serine rich protein 1
+XM_011537136.2 WARS1 tryptophanyl-tRNA synthetase 1
+NM_014247.2 RAPGEF2 Rap guanine nucleotide exchange factor 2
+XM_006710687.2 PIK3CD phosphatidylinositol-4,5-bisphosphate 3-kinase catalytic subunit delta
+XM_017022089.1 NA NA
+XM_017029031.1 NA NA
+XM_011516660.2 NA NA
+XM_017013171.1 EEF1D eukaryotic translation elongation factor 1 delta
+XM_017016481.1 NA NA
+XR_001744624.1 NA NA
+XM_011516444.1 NA NA
+XM_011536684.2 NA NA
+XR_001750229.1 NA NA
+NM_001198759.1 LY75-CD302 LY75-CD302 readthrough
+XM_011524945.2 NA NA
+XR_001738787.1 NA NA
+XM_006720056.3 NA NA
+XM_011512107.2 NA NA
+XM_011519011.2 TUT7 terminal uridylyl transferase 7
+XM_011512594.2 ATP11B ATPase phospholipid transporting 11B (putative)
+XM_017003744.1 PRKD3 protein kinase D3
+NM_001303037.1 PALS2 protein associated with LIN7 2, MAGUK p55 family member
+NM_001080437.1 SNED1 sushi, nidogen and EGF like domains 1
+NM_001008564.1 NUP58 nucleoporin 58
+XM_005252467.2 NA NA
+XM_005258325.2 RBBP8 RB binding protein 8, endonuclease
+XM_017019992.1 BRAP BRCA1 associated protein
+XM_011540318.1 SGPL1 sphingosine-1-phosphate lyase 1
+NM_198595.2 AFAP1 actin filament associated protein 1
+XM_017016465.1 NA NA
+NM_001322931.1 STAU1 staufen double-stranded RNA binding protein 1
+NM_032421.2 CLIP2 CAP-Gly domain containing linker protein 2
+XM_005260751.4 KIF16B kinesin family member 16B
+XM_006712734.3 IL1R2 interleukin 1 receptor type 2
+XR_001753652.1 NA NA
+XM_005258651.2 FBL fibrillarin
+XM_006719712.3 GIT2 GIT ArfGAP 2
+XR_001754834.1 NA NA
+XM_017004378.1 HEATR5B HEAT repeat containing 5B
+XR_241653.1 NA NA
+XM_011512827.2 NA NA
+XM_011519605.2 ARHGAP21 Rho GTPase activating protein 21
+XM_017023674.1 NA NA
+XM_011521965.1 NA NA
+XM_005245569.1 RAB29 RAB29, member RAS oncogene family
+XM_011524406.2 NA NA
+XM_017029029.1 NA NA
+XM_005258179.4 NA NA
+XM_005273559.1 PPP2R2A protein phosphatase 2 regulatory subunit Balpha
+XM_011525376.1 USP32 ubiquitin specific peptidase 32
+XM_011516735.2 NA NA
+NM_001267722.1 SRP72 signal recognition particle 72
+XM_011512461.2 NA NA
+XM_005262156.4 ATRX ATRX chromatin remodeler
+NM_020925.2 CACHD1 cache domain containing 1
+NM_020779.3 WDR35 WD repeat domain 35
+XR_001747011.1 NA NA
+NM_001128161.1 UBP1 upstream binding protein 1
+NM_005417.4 SRC SRC proto-oncogene, non-receptor tyrosine kinase
+XM_017016012.1 NA NA
+NM_001278210.1 NUP153 nucleoporin 153
+XM_011540466.2 PATJ PATJ crumbs cell polarity complex component
+XM_011510785.2 PIKFYVE phosphoinositide kinase, FYVE-type zinc finger containing
+XM_011537735.2 NA NA
+XM_017029603.1 NA NA
+XM_017027197.1 ZNF814 zinc finger protein 814
+NM_001291970.1 POLH DNA polymerase eta
+XM_005260938.4 GABPA GA binding protein transcription factor subunit alpha
+XM_011523765.2 NA NA
+XR_934439.2 NA NA
+NM_001681.3 ATP2A2 ATPase sarcoplasmic/endoplasmic reticulum Ca2+ transporting 2
+NR_037946.1 HNRNPUL2-BSCL2 HNRNPUL2-BSCL2 readthrough (NMD candidate)
+XM_017013302.1 NA NA
+XM_006711376.1 SUCO SUN domain containing ossification factor
+XM_011525266.1 GGNBP2 gametogenetin binding protein 2
+XM_017009431.1 NA NA
+XM_017008654.1 CEP44 centrosomal protein 44
+XM_005251328.2 NA NA
+XM_017004751.1 NA NA
+NM_001321021.1 UBA52 ubiquitin A-52 residue ribosomal protein fusion product 1
+XM_017012314.1 NA NA
+XM_017013109.1 NA NA
+NM_001322857.1 NIPAL3 NIPA like domain containing 3
+NR_024191.1 NA NA
+XM_017003401.1 CREB1 cAMP responsive element binding protein 1
+XM_017006432.1 NA NA
+XM_017027236.1 NA NA
+NM_001184999.1 MARF1 meiosis regulator and mRNA stability factor 1
+XM_017006859.1 NA NA
+XM_017007479.1 LRRFIP2 LRR binding FLII interacting protein 2
+XM_006712677.3 RPE ribulose-5-phosphate-3-epimerase
+XR_001740206.1 NA NA
+XR_001751335.1 NA NA
+NM_006358.3 SLC25A17 solute carrier family 25 member 17
+XM_017028352.1 MX1 MX dynamin like GTPase 1
+XM_005245764.1 EPB41 erythrocyte membrane protein band 4.1
+NM_003885.2 CDK5R1 cyclin dependent kinase 5 regulatory subunit 1
+XM_011531535.2 NA NA
+XM_011525374.1 USP32 ubiquitin specific peptidase 32
+NM_001193424.1 SUV39H2 SUV39H2 histone lysine methyltransferase
+XM_017018750.1 NA NA
+XM_005271936.1 NA NA
+XM_006710524.2 NA NA
+NM_000247.2 MICA MHC class I polypeptide-related sequence A
+XR_001748901.1 NA NA
+XM_017006194.1 NA NA
+XM_017013268.1 SPIDR scaffold protein involved in DNA repair
+NM_201277.2 CNN2 calponin 2
+XM_017017154.1 HPS5 HPS5 biogenesis of lysosomal organelles complex 2 subunit 2
+XM_011531396.2 NA NA
+NM_001321831.1 NFKBID NFKB inhibitor delta
+NM_017438.4 SETD4 SET domain containing 4
+XM_005256509.2 NA NA
+XM_017023358.1 DEF8 differentially expressed in FDCP 8 homolog
+XM_005253052.3 NA NA
+XM_005252475.3 NA NA
+NM_001018136.2 NME1-NME2 NME1-NME2 readthrough
+XM_005274036.3 KMT5B lysine methyltransferase 5B
+NM_001258332.1 GALT galactose-1-phosphate uridylyltransferase
+XM_006714577.1 PPIP5K2 diphosphoinositol pentakisphosphate kinase 2
+XR_001741209.1 NA NA
+XM_017002376.1 NA NA
+XM_017006350.1 IMPDH2 inosine monophosphate dehydrogenase 2
+NR_111951.1 LINC00869 long intergenic non-protein coding RNA 869
+XM_017029316.1 TCEANC transcription elongation factor A N-terminal and central domain containing
+NM_001300909.1 KMT5B lysine methyltransferase 5B
+XR_949476.2 NA NA
+NM_001322917.1 ZNF567 zinc finger protein 567
+XR_244131.2 NA NA
+NM_001252156.1 GEMIN5 gem nuclear organelle associated protein 5
+NM_001278504.1 STT3A STT3 oligosaccharyltransferase complex catalytic subunit A
+NM_014966.3 DHX30 DExH-box helicase 30
+XM_011543144.2 NA NA
+NM_003271.4 TSPAN4 tetraspanin 4
+XM_017017825.1 NA NA
+XM_017003626.1 NA NA
+NR_026591.1 RAD1 RAD1 checkpoint DNA exonuclease
+XR_001752585.1 SGSH N-sulfoglucosamine sulfohydrolase
+NM_033215.4 PPP1R3F protein phosphatase 1 regulatory subunit 3F
+XM_017004943.1 NA NA
+XM_017028170.1 NA NA
+XM_006710302.2 MAN1A2 mannosidase alpha class 1A member 2
+XR_921767.2 NA NA
+NM_001282186.1 CYSLTR1 cysteinyl leukotriene receptor 1
+NM_001282500.1 TTC1 tetratricopeptide repeat domain 1
+XM_017018776.1 NA NA
+XR_001739787.1 NA NA
+NR_036529.1 SUGT1P4-STRA6LP-CCDC180 SUGT1P4-STRA6LP-CCDC180 readthrough
+XM_006719520.3 NA NA
+XM_017021378.1 KLHL28 kelch like family member 28
+XM_017022216.1 NA NA
+XR_001742073.1 NA NA
+XR_001741692.1 LOC101928658 uncharacterized LOC101928658
+NM_017969.2 IWS1 interacts with SUPT6H, CTD assembly factor 1
+NM_001322958.1 TMEM183A transmembrane protein 183A
+XM_017029921.1 MTMR1 myotubularin related protein 1
+NM_005054.2 RGPD5 RANBP2 like and GRIP domain containing 5
+XM_017019682.1 NA NA
+NM_152603.4 ZNF567 zinc finger protein 567
+XM_011509548.1 NA NA
+NM_001177676.1 GPR68 G protein-coupled receptor 68
+XM_006724484.2 NA NA
+NM_019118.4 TMEM234 transmembrane protein 234
+XM_005263215.3 ARHGAP10 Rho GTPase activating protein 10
+XM_017029590.1 NA NA
+XM_017002647.1 NA NA
+NM_002373.5 MAP1A microtubule associated protein 1A
+NM_175080.2 P2RX5 purinergic receptor P2X 5
+XM_005260953.3 NA NA
+NM_001322959.1 TMEM183A transmembrane protein 183A
+NR_136227.1 DHX8 DEAH-box helicase 8
+NM_006445.3 PRPF8 pre-mRNA processing factor 8
+NM_001037675.3 NBPF9 NBPF member 9
+NM_052893.1 BTBD9 BTB domain containing 9
+XM_017016836.1 NA NA
+XM_017004930.1 NA NA
+NM_001297714.1 SWAP70 switching B cell complex subunit SWAP70
+XM_017006650.1 NA NA
+XR_001739790.1 NA NA
+XM_017010058.1 NA NA
+XM_005268948.2 NA NA
+XM_017019691.1 NA NA
+XM_017018397.1 NA NA
+XM_006714998.3 MAPK14 mitogen-activated protein kinase 14
+NM_001258217.1 MIS12 MIS12 kinetochore complex component
+NM_004380.2 CREBBP CREB binding protein
+XM_017000941.1 ST6GALNAC3 ST6 N-acetylgalactosaminide alpha-2,6-sialyltransferase 3
+NM_017865.3 ZNF692 zinc finger protein 692
+XM_005270366.3 NA NA
+NM_001012967.2 DDX60L DExD/H-box 60 like
+NM_001024070.1 GCH1 GTP cyclohydrolase 1
+NM_198202.1 POP5 POP5 homolog, ribonuclease P/MRP subunit
+XM_011544889.2 RNF169 ring finger protein 169
+NR_046397.1 NA NA
+NM_001281444.1 PKIG cAMP-dependent protein kinase inhibitor gamma
+NM_001172699.1 PPARGC1B PPARG coactivator 1 beta
+XM_017028806.1 NA NA
+XM_017012747.1 NA NA
+XM_017024702.1 NA NA
+XM_017002385.1 NA NA
+XM_017001462.1 NA NA
+NM_001286659.2 TBC1D4 TBC1 domain family member 4
+NM_001322299.1 SIDT1 SID1 transmembrane family member 1
+XM_017021868.1 NA NA
+XM_017012450.1 NA NA
+XM_011525642.1 SMCHD1 structural maintenance of chromosomes flexible hinge domain containing 1
+XM_006713203.3 NA NA
+XM_017010017.1 NA NA
+XM_006724635.2 ACSL4 acyl-CoA synthetase long chain family member 4
+XM_005250150.2 CUX1 cut like homeobox 1
+XM_011532405.1 DDX60L DExD/H-box 60 like
