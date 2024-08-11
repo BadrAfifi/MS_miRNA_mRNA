@@ -1,0 +1,12 @@
+Human U133 Plus 2.0 GeneChip array CEL data were downloaded from Gene Expression Omnibus (GEO) [42].
+ When computing power allows, the data were processed with AffyPLM [43] 
+using its three-step procedure of processing background signals with GCRMA,
+ normalizing signals with quantile normalization, and summarize probe signals with medium polish.
+ For large experimental datasets that were computationally infeasible for us,
+ we used justRMA from the Affy package [44]. For experimental dataset without raw CEL data, 
+we obtained the pre-processed matrix files via GEOQuery [45]. 
+Regardless of the source of array signal processing, we analyzed the genes for differential expression with Limma [46].
+Differentially expressed gene candidates with p-value < 0.05 and logFC > 1.0 were selected and crossed with genes 
+from EST profiling with statistical evaluation. 
+For each array, the significant genes were crossed with our EST profiling results. 
+The union of these intersecting genes was selected for further evaluation.
