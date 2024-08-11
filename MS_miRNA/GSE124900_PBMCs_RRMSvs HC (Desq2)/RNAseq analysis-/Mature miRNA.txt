@@ -1,0 +1,26 @@
+ With bash you can use "grep" to take only the human miRNAs from the fasta file.
+
+grep "Homo sapiens" mature.fa -A 1 | grep -v "\--" > only_human_mirna.fa
+
+The -A 1 argument allow us to extract one line after the matching line with the given pattern. 
+
+*****
+
+
+
+If you are working with miRDeep2 you can follow this command line;
+
+perl extract_miRNAs.pl mature.fa has mature > mature.hsa.fa
+
+you only need to change the tree letter code, in this case hsa stand for human.
+
+You can also convert the file to DNA with
+
+perl rna2dna.pl mature.hsa.fa > mature.hsa.dna.fa
+
+It´s the same for the hairpin sequences
+
+perl extract_miRNAs.pl hairpin.fa hsa> hairpin.hsa.fa
+
+perl rna2dna.pl hairpin.hsa.fa > hairpin.hsa.dna.fa
+

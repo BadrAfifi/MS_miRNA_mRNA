@@ -1,0 +1,20 @@
+
+https://help.galaxyproject.org/t/files-for-mirna-differential-expression-analysis/7901/2
+
+
+
+    Annotation.gtf
+    The Gene Transfer Format is a file format used for describing genes and other features of DNA, RNA, and protein sequences. You can download it from ENCODE https://www.gencodegenes.org/human/ ; this file corresponds to the Comprehensive gene annotation dataset.
+
+    Transcriptome.fasta
+    This file includes the sequence of all the transcripts in the human genome. You can download it from ENCODE https://www.gencodegenes.org/human/ ; this file corresponds to the Transcript sequences dataset.
+
+    mature_miRNA.fasta
+    This file includes the functional miRNA sequences. You can download it from miRBase https://mirbase.org/ftp.shtml ; this file corresponds to the mature miRNA sequences dataset.
+
+    miRNA_stem_loop_seq.fasta
+    This file contains the hairpin structure of the precursor miRNA. You can download it from miRBase https://mirbase.org/ftp.shtml ; this file corresponds to the hairpin miRNA sequences dataset.
+
+    star_miRNA_seq.fasta
+    This file includes the sequences generated after processing the pre-miRNAs, which are assumed to be non-active. However, currently, this notation has been modified, since experimental results indicate that those sequences are usually functional. For this reason, star sequences are not currently available in miRBase (because have been integrated with the mature sequences). This file is optional.
+
