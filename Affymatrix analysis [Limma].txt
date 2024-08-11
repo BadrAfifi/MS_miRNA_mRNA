@@ -1,0 +1,358 @@
+plotMDS(exprs(gse1), labels = pData(gse1)[,"disease state:ch1"],
+        gene.selection = "common")
+
+
+
+
+
+
+#                --- Installing Packages and Loading -----
+
+install.packages("BiocManager")
+
+# Install Bioconductor Packages
+BiocManager::install(c("GEOquery","GSEABase"," GOstats", "Biobase","limma"))
+BiocManager::install(c("affy", "affyPLM", "frma"))
+
+install.packages(c("ggplot2","gplots","pheatmap","dplyr","magrittr"))
+install.packages(c("RColorBrewer", "RCurl","curl","genefilter",
+                   "multtest","readr","pacman"))
+
+
+library(GEOquery)
+library(GSEABase)
+library(GOstats)
+library(Biobase)
+library(limma)
+
+library(affy)
+library(affyPLM)
+library(frma)
+
+
+library(ggplot2)
+library(gplots)
+library(pheatmap)
+library(magrittr)# needs to be run every time you start R and want to use %>%
+library(dplyr)# alternatively, this also loads %>%
+
+
+library(RColorBrewer)
+library(curl)
+library(RCurl)
+library(genefilter)
+library(readr)
+library(multtest)
+library(pacman)
+
+#            --- Loading the "Affymatrix" raw data files-----
+
+celFilesDirectory="GSE46602"
+cels_GSE = list.files(celFilesDirectory, pattern = "CEL")
+cels_GSE
+  
+  
+affyData <- ReadAffy(celfile.path=celFilesDirectory)
+affyData
+  
+class(affyData)
+rma(affyData)
+
+exprs(affyData) ## print the expression matrix
+sampleNames(affyData) ## print the sample names
+featureNames(affyData) ## print the probes names
+phenoData(affyData)
+annotation(affyData)
+
+
+#                ----- Explotary analysis -----
+
+# 1- histogram
+cols=seq(1:length(sampleNames(affyData)))
+hist(affyData ,main = "Histogram *Raw data* ",col=cols)
+legend(12,0.9, sampleNames(affyData),col=cols,lty=1, lwd=2,cex=0.5)
+
+# 2- box plots
+boxplot(affyData, main = "Box Plot *Raw data*",col=seq(1:23))
+
+
+#        ----------- Data pre-processing in one step : life is so easy !
+# threestep (background correction, normalization, summarization from probes to probesets)
+# Notice: all expression measures returned by threestep are all in the log2***scale.
+
+eset = threestep(affyData,
+                 background.method = "IdealMM",
+                 normalize.method = "quantile",
+                 summary.method = "median.polish")
+# 1- histogram
+cols=seq(1:length(sampleNames(eset)))
+hist(eset,main = "Histogram *Normalized data*",col=cols)
+legend(12,0.9, sampleNames(eset),col=cols,lty=1, lwd=2,cex=0.5)
+
+# 2- box plots
+boxplot(eset,main = "Box Plot *Normalized data*",col=seq(1:23))
+
+
+#      ------ Repreapering the dataset
+
+casenamess <- c("GSM1133136_M193-25.CEL", "GSM1133137_M193-39.CEL",   "GSM1133138_M193-14.CEL",  
+                "GSM1133139_M193-35.CEL", "GSM1133140_M193-27_2.CEL","GSM1133141_M193-13.CEL",  
+                "GSM1133142_M193-21.CEL", "GSM1133143_M193-23.CEL", "GSM1133144_M193-28.CEL", 
+                "GSM1133145_M193-33.CEL", "GSM1133146_M193-16.CEL", "GSM1133147_M193-15.CEL",  
+                "GSM1133148_M193-37.CEL", "GSM1133149_M193-11.CEL", "GSM1133152_M193-18.CEL",
+                "GSM1133153_M193-20.CEL", "GSM1133154_M193-22.CEL", "GSM1133155_M193-19.CEL", 
+                "GSM1133156_M193-34.CEL", "GSM1133157_M193-24.CEL", "GSM1133158_M193-12.CEL",
+                "GSM1133159_M193-32.CEL", "GSM1133160_M193-07.CEL", "GSM1133161_M193-31.CEL",
+                "GSM1133162_M193-30.CEL", "GSM1133164_M193-04.CEL", "GSM1133165_M193-40.CEL", 
+                "GSM1133167_M193-03.CEL", "GSM1133168_M193-29.CEL", "GSM1133169_M193-09.CEL",
+                "GSM1133170_M193-02.CEL", "GSM1133171_M193-26.CEL", "GSM1133172_M193-10.CEL" , 
+                "GSM1133173_M193-06.CEL", "GSM1133174_M193-01_2.CEL", "GSM1133175_M193-36.CEL")
+
+ctrlnamess <- c( "GSM1133163_M193-08.CEL", "GSM1133166_M193-05.CEL", "GSM1133150_M193-38_2.CEL",
+                 "GSM1133151_M193-17.CEL", "GSM1133176_M217-07.CEL", "GSM1133177_M217-01.CEL", 
+                 "GSM1133178_M217-02.CEL", "GSM1133179_M217-03.CEL", "GSM1133180_M217-04.CEL",  
+                 "GSM1133181_M217-05.CEL", "GSM1133182_M217-08.CEL", "GSM1133183_M217-09.CEL",  
+                 "GSM1133184_M217-06.CEL",  "GSM1133185_M217-10.CEL" )
+
+length(casenamess)
+length(ctrlnamess)
+
+ee <- as.data.frame(exprs(eset))
+dim(ee)
+
+case_data <- ee %>% select(all_of(casenamess))
+cotrl_data <- ee %>% select(all_of(ctrlnamess))
+
+exprData <- bind_cols(case_data,cotrl_data)
+dim(exprData)
+
+
+exprData # the pre-Procesed dataset !!
+
+##-- For next plots, Arranging manually "sampleInfo" which contains the type of samples
+# -- preapering manually according the number and location of the sample columns in the data frame
+
+samplnames <- colnames(exprData)
+status <- c(rep("Case", 36),rep("Healthy", 14))
+  
+sampleInfo <- as.data.frame(bind_cols(samplnames,status))
+names(sampleInfo)[1]="sample_names" # rename column 1
+names(sampleInfo)[2]="Condition" # rename column 2
+sampleInfo
+
+# 3- Unsupervised analysis -- is a good way to get an understanding of the sources of variation in the data.
+#It can also identify potential outlier samples.
+
+corMatrix <- cor(exprData,use="c") ## argument use="c" stops an error if there are any missing data points
+rownames(sampleInfo) <- colnames(corMatrix)
+pheatmap(corMatrix,
+         annotation_col=sampleInfo , Rowv = NA, Colv = NA,
+         dendrogram = "none", scale = "row", trace = "none")    
+colramp <- colorRampPalette(c(3,"white",2))(9)
+heatmap.2(corMatrix, col= colramp, Rowv = NA, Colv = NA,
+          dendrogram = "none", scale = "row", trace = "none")# remove Rowv and Colv
+
+
+# 4- Principal Components Analysis (PCA).
+## MAKE SURE TO TRANSPOSE THE EXPRESSION MATRIX
+pca <- prcomp(t(exprData),)
+## Join the PCs to the sample information
+cbind(sampleInfo, pca$x) %>% 
+  ggplot(aes(x = PC1, y=PC2, col=Condition,label=paste("Condition", Condition))) + geom_point()
+
+
+#           ----- Aggregating the genes data -----
+
+# -- Check the expression data 
+# -- check values  
+sum(!complete.cases(exprData)) # check if there is a missing values.
+sum(is.na(exprData))# check if there is NAN 
+
+
+#### mapping the probe ids into gene symbole
+#### First of all, you should know what the data annotation is by annotation()
+exprData1 <- bind_cols(rownames(eset),case_data,cotrl_data)
+row.names(exprData1) <- NULL
+names(exprData1)[1]="probe_id" # to rename the first col to prob_id
+
+annotation(affyData)
+BiocManager::install("hgu133plus2.db")
+library(hgu133plus2.db)
+
+hgu133plus2()
+mapper = hgu133plus2SYMBOL
+mapper
+map.df = as.data.frame(mapper)
+head(map.df) # two columns together "probe_id" and "symbol"
+
+# merge the two data frames to have the symbole annotation in the data object
+exprData2 <- merge(exprData1,map.df,by="probe_id",all.x=T)
+
+# do i need the probe id again?  no, then let's drop it
+exprData2=exprData2[,-1]
+
+# remove nulls : some probes were not mapped to any gene symbol
+sum(is.na(exprData2$symbol))
+exprData2 <- exprData2[ ! is.na(exprData2$symbol),]
+dim(exprData2)
+
+# check duplciation of of gene symbols?  
+sum(duplicated(exprData2$symbol))
+
+
+### yes .. why ? probesets?  solutions : aggregation
+agg_exprData= aggregate(exprData2, list(exprData2$symbol),FUN=mean)
+dim(agg_exprData)
+
+rownames(agg_exprData) <- agg_exprData[,1]# to rename the gene symbols as rownames
+agg_exprData <- agg_exprData[,-1] # remove the gene symbols as a column
+agg_exprData$symbol <- NULL # remove the gene symbols as a column
+
+
+#         ================[limma]===================
+
+#By far the most-popular package for performing differential expression is limma.
+#The design matrix is a matrix of 0 and 1s; one row for each sample and one column for each sample group.
+#A 1 in a particular row and column indicates that a given sample (the row) belongs to a given group (column).
+
+design <- model.matrix(~0+sampleInfo$Condition)
+design
+colnames(design) <- c("Case","Healthy") ## rename the columns to select them easly later 
+
+#***Coping with outliers
+#It is tempting to discard any arrays which seem to be outliers prior to differential expressions. 
+#However, this is done at the expense of sample-size which could be an issue for small experiments. 
+#A compromise, which has been shown to work well is to calculate **weights to define the reliability of each sample.
+aw <- arrayWeights(agg_exprData,design)
+aw
+
+#***The lmFit function is used to fit the model to the data. 
+#The result of which is to estimate the expression level in each of the groups that we specified.
+
+
+fit <- lmFit(agg_exprData, design,weights = aw)
+head(fit$coefficients)
+
+##In order to perform the differential analysis, we have to define the contrast that we are interested in. In our case we only have two groups and one contrast of interest.
+##Multiple contrasts can be defined in the makeContrasts function
+# Case - Healthy: gene expression of sick mice is greater than healthy mice by a value of 
+# Healthy - Case: gene expression of healthy mice is greater than sick mice by a value of 
+contrasts <- makeContrasts(Case - Healthy, 
+                           Healthy - Case,
+                           levels=design)
+
+## can define multiple contrasts
+## e.g. makeContrasts(Group1 - Group2, Group2 - Group3,....levels=design)
+
+fit2 <- contrasts.fit(fit, contrasts)
+
+##Finally, apply the empirical Bayes’ step 
+##to get our differential expression statistics and p-values.
+fit2 <- eBayes(fit2)
+head(fit2$coefficients)
+
+#If we want to know how many genes are differentially-expressed overall
+#we can use the decideTests function.
+table(decideTests(fit2))
+
+topTable(fit2, coef=1) ## topTable(fit2, coef=2) ### to see the results of the second contrast (if it exists)
+
+
+## to perform adjust.method="fdr" FDR means ***Benjamini & Hochberg (1995) ("BH")***
+top1 <- limma::topTable(fit2, coef=1, number=nrow(fit2), adjust.method="fdr",sort.by="none") # Cancer - Healthy
+top2 <- limma::topTable(fit2, coef=2, number=nrow(fit2), adjust.method="BH",sort.by="none") #Healthy - Cancer
+
+
+#   ================[Exporting & Visualization Of DE results]================
+
+# select the Comparison items
+full_results <- as.data.frame(top1) #Case-Healthy
+
+#[1] Exporting
+
+degs.res= full_results[abs(full_results$logFC) >= 2  & full_results$adj.P.Val <= 0.05, ]
+degs.res_UP=full_results[full_results$logFC >= 2   & full_results$adj.P.Val <= 0.05,]  
+degs.res_DOWN=full_results[full_results$logFC  <= -2   & full_results$adj.P.Val <= 0.05,] 
+
+write.table(degs.res,file = "DEGs.txt",row.names = T,col.names = T,quote = F)
+write.table(rownames(degs.res_UP),file = "DEGs_UP.txt",row.names = F,col.names = F,quote = F)
+write.table(rownames(degs.res_DOWN),file = "DEGs_DOWN.txt",row.names = F,col.names = F,quote = F)
+
+
+#[2] Visualization
+# [A] ----------- Volcano (UP/Down)-----------  
+
+res2 <- full_results %>%
+  mutate(gene_type = case_when(logFC >= 2  & adj.P.Val <= 0.05 ~ "up",
+                               logFC <= -2  & adj.P.Val <= 0.05 ~ "down",
+                               TRUE ~ "ns"))   
+cols <- c("up" = "#FF0000", "down" = "#00FF00", "ns" = "grey") 
+sizes <- c("up" = 2, "down" = 2, "ns" = 1) 
+alphas <- c("up" = 1, "down" = 1, "ns" = 0.5)
+
+res2 %>%
+  ggplot(aes(x = (logFC),
+             y = -log10(adj.P.Val),
+             fill = gene_type,    
+             size = gene_type,
+             alpha = gene_type)) + 
+  geom_point(shape = 21, # Specify shape and colour as fixed local parameters    
+             colour = "black") + 
+  geom_hline(yintercept = (0.05),
+             linetype = "dashed") + 
+  geom_vline(xintercept = c(-1, 1),
+             linetype = "dashed") +
+  scale_fill_manual(values = cols) + # Modify point colour
+  scale_size_manual(values = sizes) + # Modify point size
+  scale_alpha_manual(values = alphas) + # Modify point transparency
+  scale_x_continuous(breaks = c(seq(-4, 4, 2)),       
+                     limits = c(-4, 4)) 
+
+#[2] Visualization
+
+
+
+
+#  ===========
+
+degs.res2 <- read.table("DEGs.txt")
+
+## Add the ' ENTREZID ' Coz it will be needed in the Pathway analyses 
+
+mapper1 = hgu133plus2SYMBOL
+mapper1
+map.df1 = as.data.frame(mapper1)
+head(map.df1)
+symbol <- map.df[map.df1$symbol %in% rownames(degs.res2), ]
+
+mapper2 = hgu133plus2ENTREZID
+mapper2
+map.df2 = as.data.frame(mapper2)
+head(map.df2)
+Entrez_ID <- map.df2[map.df2$probe_id %in% symbol$probe_id, ]
+
+symbol_EntrezID <- unique(bind_cols(Entrez_ID$gene_id, symbol$symbol))
+symbol_EntrezID <- symbol_EntrezID[order(symbol_EntrezID$...2), ]
+
+# bind the IDS and symbols to DGEs file
+
+degs.res_IDs <- bind_cols(symbol_EntrezID,degs.res)
+
+# check if name1 and name2 columns are the same
+if (identical(row.names(degs.res_IDs), degs.res_IDs$...2)) {
+  print("The symbols are the same.")
+} else {
+  print("The columns are different.")
+  different_values <- which(df$name1 != df$name2)
+  print(paste("The different values are at rows:", different_values))
+}
+
+names(degs.res_IDs)[1]="IDs"
+names(degs.res_IDs)[2]="symbol"
+write.table(degs.res_IDs,file = "DEGs[IDs&symbol].txt",row.names = F,col.names = T,quote = F)
+write.table(rownames(degs.res_IDs),file = "DEGs[names].txt",row.names = F,col.names = F,quote = F)
+
+
+
+
+
