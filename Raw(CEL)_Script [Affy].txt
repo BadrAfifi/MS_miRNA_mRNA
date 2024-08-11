@@ -1,0 +1,270 @@
+library(GEOquery)
+library(hgu133plus2.db)
+library(hgu133acdf)
+library(limma)
+library(hgu133plus2cdf)
+library(GSEABase)
+library(GOstats)
+library(ggplot2)
+library(gplots)
+library(RColorBrewer)
+library(curl)
+library(RCurl)
+library(affy)
+library(readr)
+library(hgu133a.db)
+library(genefilter)
+library(multtest)
+library(affyPLM)
+library(pheatmap)
+library(pacman)
+library(magrittr) # needs to be run every time you start R and want to use %>%
+library(dplyr)    # alternatively, this also loads %>%
+
+
+### load the CEL files
+celFilesDirectory_GSE178="GSE178243"
+cels_GSE178 = list.files(celFilesDirectory_GSE178, pattern = "CEL")
+cels_GSE178
+
+GSE178_Hep3B <- cels_GSE178[1:6]
+GSE178_SNU449 <- cels_GSE178[7:12]
+GSE178_PLC <- cels_GSE178[13:18]
+
+affyData_GSE178 <- ReadAffy(celfile.path=celFilesDirectory_GSE178)
+affyData_GSE178
+
+## data exploration
+
+# explore data
+class(affyData_GSE178)
+sampleNames(affyData_GSE178)
+featureNames(affyData_GSE178)
+head(featureNames(affyData_GSE178))
+annotation(affyData_GSE178)
+dim(affyData_GSE178)
+
+# see how the RAW expression look like without processing : notice the large values
+head(exprs(affyData_GSE178))
+#another way to explore expressions in the first 3 genes/probes in the first 5 columns
+exprs(affyData_GSE178)[1:3, 1:5]
+
+# Exploratory analysis  1- histogram
+cols=seq(1:length(sampleNames(affyData_GSE178)))
+hist(affyData_GSE178,main = "Histogram affyData_GSE178",col=cols)
+legend(12,0.9, sampleNames(affyData_GSE178),col=cols,lty=1, lwd=2,cex=0.5)
+
+# Exploratory analysis  2- box plots
+boxplot(affyData_GSE178,main = "Box Plot GSE178",col=seq(1:23))
+
+
+#data pre-processing in one step : life is so easy !
+# threestep (background correction, normalization, summarization from probes to probesets)
+# Notice: all expression measures returned by threestep are all in the log2***
+scale.
+eset = threestep(affyData_GSE178,
+                 background.method = "IdealMM",
+                 normalize.method = "quantile",
+                 summary.method = "median.polish")
+# Exploratory analysis  1- histogram
+cols=seq(1:length(sampleNames(eset)))
+hist(eset,main = "Histogram affyData_GSE178",col=cols)
+legend(12,0.9, sampleNames(eset),col=cols,lty=1, lwd=2,cex=0.5)
+
+# Exploratory analysis  2- box plots
+boxplot(eset,main = "Box Plot GSE178",col=seq(1:23))
+
+
+# export the expression data to a text file
+write.exprs(eset,file="expData.processed.txt")
+
+#----------------------------------------------------------------------
+
+## load already processed data
+data <- read_delim("expData.processed.txt", "\t", escape_double = FALSE, trim_ws = TRUE)
+names(data)
+names(data)[1]="probe_id" # to rename the first col to prob_id
+names(data)
+
+
+#### mapping the probe ids into gene symbole
+#### First of all, you should know what the data annotation is by annotation()
+annotation(affyData_GSE178)
+
+hgu133plus2()
+mapper = hgu133plus2SYMBOL
+mapper
+map.df = as.data.frame(mapper)
+head(map.df)
+
+# merge the two data frames to have the symbole annotation in the data object
+data2=merge(data,map.df,by="probe_id",all.x=T)
+head(data2)
+
+# do i need the probe id again?  no, then let's drop it
+data2=data2[,-1]
+
+# remove nulls : some probes were not mapped to any gene symbol
+data2=data2[ ! is.na(data2$symbol),]
+
+
+# check duplciation of of gene symbols?  
+x=duplicated(data2$symbol)  
+sum(x)
+
+### yes .. why ? probesets?  solutions : aggregation
+exp.data=data2[-dim(data2)[2]]
+exp.data=apply(exp.data,2, as.numeric)
+
+####remove duplication
+exp.data.agg= aggregate(exp.data, list(data2$symbol),FUN=mean)
+names(exp.data.agg)
+
+rownames(exp.data.agg)=exp.data.agg$Group.1
+exp.data.agg=exp.data.agg[- 1]
+
+
+#save the object in a RDATA file
+save(exp.data.agg,file="processed.RDATA")
+
+#----------------------------------------------------
+
+#### do the DIFF EXP Analysis (Hep3B cells)
+GSE178 <- exp.data.agg [1:6]
+
+colnames(GSE178)
+
+ctrlnamess <- c("GSM5385617_Hep3B_Scr_1.CEL.gz",
+               "GSM5385618_Hep3B_Scr_2.CEL.gz",
+               "GSM5385619_Hep3B_Scr_3.CEL.gz",
+               "GSM5385623_SNU449_Scr_1.CEL.gz",
+               "GSM5385624_SNU449_Scr_2.CEL.gz",
+               "GSM5385625_SNU449_Scr_3.CEL.gz",
+               "GSM5385629_PLC_Sc1_01.CEL.gz",
+               "GSM5385630_PLC_Sc2_02.CEL.gz",  
+               "GSM5385631_PLC_Sc3_03.CEL.gz")
+
+casenamess <- c("GSM5385620_Hep3B_AT_1.CEL.gz",  
+                "GSM5385621_Hep3B_AT_2.CEL.gz",
+                "GSM5385622_Hep3B_AT_3.CEL.gz",
+                "GSM5385626_SNU449_AT_1.CEL.gz", 
+                "GSM5385627_SNU449_AT_2.CEL.gz",
+                "GSM5385628_SNU449_AT_3.CEL.gz",
+                "GSM5385632_PLC_AT1_04.CEL.gz",  
+                "GSM5385633_PLC_AT2_05.CEL.gz",
+                "GSM5385634_PLC_AT3_06.CEL.gz")
+
+cotrl_data <- exp.data.agg %>% select(ctrlnamess)
+case_data <- exp.data.agg %>% select(casenamess)
+
+new_order <- bind_cols(cotrl_data,case_data)
+
+colnames(GSE178)
+
+GSE178 <- new_order [1:18]
+
+ctrl.indecies= c(1:3) #### or  seq(from=9,to=dim(exp)[2])
+case.indecies=c(4:6)
+
+## calculating LFC [log2 foldchanges ]
+lfc.diff=apply(GSE178,1, function(x)  mean(x[case.indecies]) -mean(x[ctrl.indecies]))
+
+
+## calcualting p values
+f=factor( c( rep(1, length(ctrl.indecies)) , rep(2, length(case.indecies)) ))
+t.pval=rowttests(as.matrix(GSE178),f)$p.value
+
+
+# Function to calculate adjusted p-values using Benjamini-Hochberg method
+benjamini_hochberg <- function(p_values) {
+  n <- length(p_values)
+  adj_p_values <- p.adjust(p_values, method = "BH")
+  return(adj_p_values)
+}
+adj_p_values <- benjamini_hochberg(t.pval)
+
+
+res=as.data.frame(cbind(lfc.diff,t.pval,adj_p_values))
+
+
+#####  selection criteria for identifying DEGS
+degs.res=res[t.pval<0.05,]  ##### identify DEGs based on teh significance level only
+degs.res=res[abs(lfc.diff) > log2(2),]  ##### identify DEGs based on the LFC only
+degs.res=res[abs(lfc.diff) >= 1  & adj_p_values <= 0.05 ,]  ##### identify DEGs based on both  LFC and the significane level 
+
+degs.res_UP=res[lfc.diff >= 1   & adj_p_values <= 0.05,]  
+degs.res_DOWN=res[lfc.diff <= -1   & adj_p_values <= 0.05,] 
+
+
+degs.genes=rownames(degs.res)
+dim(degs.genes)
+#export them for further analysis in DAVID
+write.table(rownames(degs.res),file = "DEGs.txt",row.names = F,col.names = F,quote = F)
+write.table(rownames(degs.res_UP),file = "DEGs_UP.txt",row.names = F,col.names = F,quote = F)
+write.table(rownames(degs.res_DOWN),file = "DEGs_DOWN.txt",row.names = F,col.names = F,quote = F)
+
+
+### creating a heatmap
+#------------------------------------------------------------
+#  get the expression profiles of the degs only
+
+exp.degs=GSE178[rownames(GSE178) %in% degs.genes, ]
+dsm=exp.degs
+
+colnames=colnames(dsm)
+ctrl.vector=rep("Ctrl", length(ctrl.indecies))
+case.vector=rep("Case", length(case.indecies))
+Sample=c( ctrl.vector, case.vector)
+
+annotation=as.data.frame(Sample)
+rownames(annotation)=colnames
+annotation
+
+# Specify colors
+Sample = c("lightgreen", "navy")
+names(Sample) = c("Ctrl", "Case")
+ann_colors = list(Sample = Sample)
+
+m2=scale(t(dsm),center=T,scale=T)
+
+m2=t(m2)
+
+pheatmap(m2, annotation = annotation, annotation_colors = ann_colors,fontsize_row = 5,fontsize_col = 9)
+heatmap.2(m2, cexCol=0.7,col = rev(redblue(26)), scale = "row")
+
+
+####  up & Down Regulated Genes "Volcano plots"
+#------------------------------------------------------------
+summary(res$lfc.diff) 
+
+res2 <- res %>%
+  mutate(gene_type = case_when(lfc.diff >= 1  & t.pval <= 0.05 ~ "up",
+                               lfc.diff <= -1  & t.pval <= 0.05 ~ "down",
+                               TRUE ~ "ns"))   
+
+# Obtain gene_type counts 
+res2 %>% count(gene_type)
+
+
+cols <- c("up" = "#FF0000", "down" = "#00FF00", "ns" = "grey") 
+sizes <- c("up" = 2, "down" = 2, "ns" = 1) 
+alphas <- c("up" = 1, "down" = 1, "ns" = 0.5)
+
+
+res2 %>%
+  ggplot(aes(x = (lfc.diff),
+             y = -log10(t.pval),
+             fill = gene_type,    
+             size = gene_type,
+             alpha = gene_type)) + 
+  geom_point(shape = 21, # Specify shape and colour as fixed local parameters    
+             colour = "black") + 
+  geom_hline(yintercept = (0.05),
+             linetype = "dashed") + 
+  geom_vline(xintercept = c(-1, 1),
+             linetype = "dashed") +
+  scale_fill_manual(values = cols) + # Modify point colour
+  scale_size_manual(values = sizes) + # Modify point size
+  scale_alpha_manual(values = alphas) + # Modify point transparency
+  scale_x_continuous(breaks = c(seq(-3, 3, 2)),       
+                     limits = c(-3, 3)) 
